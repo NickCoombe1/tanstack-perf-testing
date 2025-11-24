@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "id": 1, "name": "Alpha", "status": "active", "count": 42 },
+    { "id": 2, "name": "Bravo", "status": "inactive", "count": 15 },
+    { "id": 3, "name": "Charlie", "status": "active", "count": 87 },
+    { "id": 4, "name": "Delta", "status": "active", "count": 23 },
+    { "id": 5, "name": "Echo", "status": "inactive", "count": 9 },
+    { "id": 6, "name": "Foxtrot", "status": "active", "count": 58 },
+    { "id": 7, "name": "Golf", "status": "inactive", "count": 71 },
+    { "id": 8, "name": "Hotel", "status": "active", "count": 34 },
+    { "id": 9, "name": "India", "status": "active", "count": 11 },
+    { "id": 10, "name": "Juliet", "status": "inactive", "count": 66 }
+  ]
+}
