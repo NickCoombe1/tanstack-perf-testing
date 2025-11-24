@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 
 export function useItems() {
   return useQuery({
@@ -20,5 +20,33 @@ export function useItem(id: number | string) {
       return res.json();
     },
     enabled: !!id, // prevents running when id is undefined
+  });
+}
+
+export function useToggleStatus() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    // mutationFn receives the item you want to update
+    mutationFn: async ({
+      id,
+      newStatus,
+    }: {
+      id: number;
+      newStatus: "active" | "inactive";
+    }) => {
+      const res = await fetch(`http://localhost:4000/items/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (!res.ok) throw new Error("Failed to update status");
+      return res.json();
+    },
+    // After a successful mutation, refetch the items list
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["items"] });
+    },
   });
 }
