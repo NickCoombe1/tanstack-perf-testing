@@ -8,12 +8,13 @@ export default function ItemsTable() {
   if (error) return <p>Error: {error.message}</p>;
 
   const handleToggle = (id: number, currentStatus: "active" | "inactive") => {
+    console.log("Triggering mutation");
     toggleStatus.mutate({
       id,
       newStatus: currentStatus === "active" ? "inactive" : "active",
     });
   };
-
+  console.log("Data in cache pre:" + JSON.stringify(data));
   return (
     <table style={{ borderCollapse: "collapse", width: "500px" }}>
       <thead>
@@ -32,9 +33,9 @@ export default function ItemsTable() {
             <td style={tdStyle}>{item.status}</td>
             <td style={tdStyle}>
               <button
-                onClick={() =>
-                  handleToggle(item.id, item.status as "active" | "inactive")
-                }
+                onClick={() => {
+                  handleToggle(item.id, item.status as "active" | "inactive");
+                }}
               >
                 Toggle Status
               </button>

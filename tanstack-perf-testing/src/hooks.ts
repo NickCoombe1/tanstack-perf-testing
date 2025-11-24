@@ -45,8 +45,17 @@ export function useToggleStatus() {
       return res.json();
     },
     // After a successful mutation, refetch the items list
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["items"] });
+    onSuccess: (mutationResult) => {
+      console.log(`Invalidating ID:${JSON.stringify(mutationResult.id)}`);
+      queryClient.setQueryData(["items"], (old: any) => {
+        if (!old) return;
+        console.log(
+          "Old cache hit: " + JSON.stringify(old[mutationResult.id - 1])
+        );
+        return old.map((item: any) =>
+          item.id === mutationResult.id ? mutationResult : item
+        );
+      });
     },
   });
 }
