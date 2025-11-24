@@ -14,7 +14,7 @@ export default function ItemsTable() {
       newStatus: currentStatus === "active" ? "inactive" : "active",
     });
   };
-  console.log("Data in cache pre:" + JSON.stringify(data));
+
   return (
     <table style={{ borderCollapse: "collapse", width: "500px" }}>
       <thead>
